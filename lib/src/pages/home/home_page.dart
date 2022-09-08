@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
         actions: <Widget>[
           IconButton(
             color: Colors.white,
-            onPressed: () => print("test"),
+            onPressed: () => print("test safe"),
             icon: const Icon(Icons.login),
           ),
         ],
