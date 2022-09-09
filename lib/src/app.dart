@@ -1,4 +1,5 @@
-import 'package:firstflutter/src/pages/home/home_page.dart';
+// import 'package:firstflutter/src/pages/home/home_page.dart';
+import 'package:firstflutter/src/pages/login/login_page.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -8,11 +9,12 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'MECHA II by Safem0de',
+      title: 'MECHA II\nby Safem0de',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const HomePage(title: 'MECHA II by Safem0de'),
+      home: const LoginPage(),
     );
   }
 }

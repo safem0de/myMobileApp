@@ -1,3 +1,4 @@
+import 'package:firstflutter/src/constants/asset.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -9,12 +10,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  void _incrementCounter() {
-    setState(() {
-      '';
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,8 +18,8 @@ class _HomePageState extends State<HomePage> {
         actions: <Widget>[
           IconButton(
             color: Colors.white,
-            onPressed: () => print("test safe"),
-            icon: const Icon(Icons.login),
+            onPressed: () {},
+            icon: const Icon(Icons.person),
           ),
         ],
       ),
@@ -37,14 +32,11 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            DrawerHeader(
-              decoration: const BoxDecoration(
+            const DrawerHeader(
+              decoration: BoxDecoration(
                 color: Colors.blue,
               ),
-              child: Text(
-                'Mecha II Application',
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
+              child: Image(image: AssetImage(Asset.LOGO_IMAGE)),
             ),
             ListTile(
               leading: const Icon(Icons.merge),
