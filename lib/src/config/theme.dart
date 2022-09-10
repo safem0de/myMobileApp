@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 class Theme {
   const Theme();
 
-  static const Color gradientStart = Color(0xFF58c0de);
-  static const Color gradientEnd = Color(0xFFceb7cf);
+  static const Color gradientStart = Color(0xFF859398);
+  static const Color gradientEnd = Color(0xFF283048);
 
   static const gradient = LinearGradient(
     colors: [gradientStart, gradientEnd],

@@ -26,9 +26,9 @@ class _LoginPageState extends State<LoginPage> {
             children: const <Widget>[
               Header(),
               LoginForm(),
-              Text('forgot password'),
-              Text('SSO'),
-              Text('register'),
+              // Text('forgot password'),
+              // Text('SSO'),
+              // Text('register'),
             ],
           )
         ],
