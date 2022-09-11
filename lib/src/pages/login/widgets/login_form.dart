@@ -13,8 +13,8 @@ class _LoginFormState extends State<LoginForm> {
   late TextEditingController usernameController;
   late TextEditingController passwordController;
 
-  late String _errorUsername;
-  late String _errorPassword;
+  String? _errorUsername;
+  String? _errorPassword;
 
   @override
   void initState() {
@@ -57,6 +57,8 @@ class _LoginFormState extends State<LoginForm> {
           child: FormInput(
             usernameController: usernameController,
             passwordController: passwordController,
+            errorUsername: _errorUsername,
+            errorPassword: _errorPassword,
           ),
         ),
       );
@@ -70,14 +72,27 @@ class _LoginFormState extends State<LoginForm> {
             String username = usernameController.text;
             String password = passwordController.text;
 
-            if (!EmployeeSubmitRegexValidator().isValid(username)){
+            _errorUsername = null;
+            _errorPassword = null;
+
+            if (!EmployeeSubmitRegexValidator().isValid(username)) {
               _errorUsername = 'The employee code must be a valid';
               print(_errorUsername);
             }
 
-            if(password.length < 8){
+            if (password.length < 8) {
               _errorPassword = 'Password incorrect';
               print(_errorPassword);
+            }
+
+            if (_errorUsername == null && _errorPassword == null){
+              setState(() {
+
+              });
+            }else{
+              setState(() {
+
+              });
             }
           },
           child: const Text(
@@ -123,11 +138,15 @@ class _LoginFormState extends State<LoginForm> {
 class FormInput extends StatefulWidget {
   final TextEditingController? usernameController;
   final TextEditingController? passwordController;
+  final String? errorUsername;
+  final String? errorPassword;
 
   const FormInput({
     Key? key,
     required this.usernameController,
     required this.passwordController,
+    required this.errorUsername,
+    required this.errorPassword,
   }) : super(key: key);
 
   @override
@@ -158,19 +177,21 @@ class _FormInputState extends State<FormInput> {
           fontSize: 20,
           fontWeight: FontWeight.w500,
         ),
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
           border: InputBorder.none,
           labelText: 'Password',
           hintText: '8 Characters password',
-          labelStyle: TextStyle(
+          errorText: widget.errorPassword,
+          labelStyle: const TextStyle(
             color: Colors.black,
           ),
-          icon: Icon(
+          icon: const Icon(
             Icons.lock_open,
             size: 22,
             color: Colors.black,
           ),
         ),
+        // obscureText: true,
       );
 
   TextField _buildUsername() => TextField(
@@ -180,18 +201,20 @@ class _FormInputState extends State<FormInput> {
           fontSize: 20,
           fontWeight: FontWeight.w500,
         ),
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
           border: InputBorder.none,
           labelText: 'Employee No.',
           hintText: '5 Characters',
-          labelStyle: TextStyle(
+          errorText: widget.errorUsername,
+          labelStyle: const TextStyle(
             color: Colors.black,
           ),
-          icon: Icon(
+          icon: const Icon(
             Icons.account_box_rounded,
             size: 22,
             color: Colors.black,
           ),
         ),
+        // obscureText: true,
       );
 }
