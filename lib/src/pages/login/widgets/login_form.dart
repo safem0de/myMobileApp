@@ -1,3 +1,4 @@
+import 'package:firstflutter/src/utils/regex_validation.dart';
 import 'package:flutter/material.dart';
 import 'package:firstflutter/src/config/theme.dart' as custom_theme;
 
@@ -11,6 +12,9 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   late TextEditingController usernameController;
   late TextEditingController passwordController;
+
+  late String _errorUsername;
+  late String _errorPassword;
 
   @override
   void initState() {
@@ -63,8 +67,18 @@ class _LoginFormState extends State<LoginForm> {
         decoration: _boxDecoration(),
         child: TextButton(
           onPressed: () {
-            print(usernameController.text);
-            print(passwordController.text);
+            String username = usernameController.text;
+            String password = passwordController.text;
+
+            if (!EmployeeSubmitRegexValidator().isValid(username)){
+              _errorUsername = 'The employee code must be a valid';
+              print(_errorUsername);
+            }
+
+            if(password.length < 8){
+              _errorPassword = 'Password incorrect';
+              print(_errorPassword);
+            }
           },
           child: const Text(
             'LOGIN',
@@ -147,6 +161,7 @@ class _FormInputState extends State<FormInput> {
         decoration: const InputDecoration(
           border: InputBorder.none,
           labelText: 'Password',
+          hintText: '8 Characters password',
           labelStyle: TextStyle(
             color: Colors.black,
           ),
@@ -166,15 +181,17 @@ class _FormInputState extends State<FormInput> {
           fontWeight: FontWeight.w500,
         ),
         decoration: const InputDecoration(
-            border: InputBorder.none,
-            labelText: 'Employee No.',
-            labelStyle: TextStyle(
-              color: Colors.black,
-            ),
-            icon: Icon(
-              Icons.account_box_rounded,
-              size: 22,
-              color: Colors.black,
-            )),
+          border: InputBorder.none,
+          labelText: 'Employee No.',
+          hintText: '5 Characters',
+          labelStyle: TextStyle(
+            color: Colors.black,
+          ),
+          icon: Icon(
+            Icons.account_box_rounded,
+            size: 22,
+            color: Colors.black,
+          ),
+        ),
       );
 }
