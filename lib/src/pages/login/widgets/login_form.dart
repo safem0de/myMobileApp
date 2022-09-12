@@ -1,7 +1,10 @@
+import 'dart:ui';
+
 import 'package:another_flushbar/flushbar.dart';
-import 'package:firstflutter/src/utils/regex_validation.dart';
+import '../../home/home_page.dart';
+import '../../../utils/regex_validation.dart';
 import 'package:flutter/material.dart';
-import 'package:firstflutter/src/config/theme.dart' as custom_theme;
+import '../../../config/theme.dart' as custom_theme;
 
 class LoginForm extends StatefulWidget {
   const LoginForm({Key? key}) : super(key: key);
@@ -63,6 +66,19 @@ class _LoginFormState extends State<LoginForm> {
           ),
         ),
       );
+  void showAlertBar() {
+    Flushbar(
+      title: 'Username or Password is incorrect',
+      message: 'Please try again.',
+      icon: const Icon(
+        Icons.error,
+        size: 28.0,
+        color: Colors.red,
+      ),
+      duration: const Duration(seconds: 3),
+      margin: const EdgeInsets.all(8),
+    ).show(context);
+  }
 
   void showLoading() {
     Flushbar(
@@ -96,8 +112,16 @@ class _LoginFormState extends State<LoginForm> {
         Navigator.pop(context);
         if (username == 'D9302' && password == '12345678') {
           print('success');
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomePage(
+                username: username,
+              ),
+            ),
+          );
         } else {
-          print('Show alert');
+          showAlertBar();
           setState(() {});
         }
       });

@@ -1,4 +1,4 @@
-import 'package:firstflutter/src/viewmodels/single_sign_on_view_model.dart';
+import '../../../viewmodels/single_sign_on_view_model.dart';
 import 'package:flutter/material.dart';
 
 class SingleSignOn extends StatelessWidget {

@@ -28,6 +28,7 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 const Header(),
                 const LoginForm(),
+                const SizedBox(height: 60),
                 _buildFlatButton(
                   'forgot password',
                   onPressed: () {

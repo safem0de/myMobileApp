@@ -1,4 +1,4 @@
-import 'package:firstflutter/src/constants/asset.dart';
+import '../../../constants/asset.dart';
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
