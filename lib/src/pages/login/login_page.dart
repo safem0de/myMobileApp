@@ -1,8 +1,8 @@
-import 'package:firstflutter/src/pages/login/widgets/header.dart';
-import 'package:firstflutter/src/pages/login/widgets/single_sign_on.dart';
-import 'package:firstflutter/src/pages/login/widgets/login_form.dart';
+import 'widgets/header.dart';
+import 'widgets/single_sign_on.dart';
+import 'widgets/login_form.dart';
 import 'package:flutter/material.dart';
-import 'package:firstflutter/src/config/theme.dart' as custom_theme;
+import '../../config/theme.dart' as custom_theme;
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -23,17 +23,43 @@ class _LoginPageState extends State<LoginPage> {
               gradient: custom_theme.Theme.gradient,
             ),
           ),
-          Column(
-            children: const <Widget>[
-              Header(),
-              LoginForm(),
-              Text('forgot password'),
-              SingleSignOn(),
-              // Text('register'),
-            ],
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                const Header(),
+                const LoginForm(),
+                _buildFlatButton(
+                  'forgot password',
+                  onPressed: () {
+                    // Todo
+                  },
+                ),
+                const SingleSignOn(),
+                _buildFlatButton(
+                  'register',
+                  onPressed: () {
+                    // Todo
+                  },
+                ),
+                const SizedBox(height: 40),
+              ],
+            ),
           )
         ],
       ),
     );
   }
+
+  TextButton _buildFlatButton(
+    String text, {
+    required VoidCallback onPressed,
+    double fontSize = 16.0,
+  }) =>
+      TextButton(
+        onPressed: onPressed,
+        child: Text(
+          text,
+          style: TextStyle(color: Colors.white, fontSize: fontSize),
+        ),
+      );
 }
