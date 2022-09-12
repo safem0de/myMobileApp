@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:firstflutter/src/utils/regex_validation.dart';
 import 'package:flutter/material.dart';
 import 'package:firstflutter/src/config/theme.dart' as custom_theme;
@@ -63,38 +64,54 @@ class _LoginFormState extends State<LoginForm> {
         ),
       );
 
+  void showLoading() {
+    Flushbar(
+      message: 'Loading...',
+      showProgressIndicator: true,
+      flushbarPosition: FlushbarPosition.TOP,
+      flushbarStyle: FlushbarStyle.GROUNDED,
+    ).show(context);
+  }
+
+  void _onLogin() {
+    String username = usernameController.text;
+    String password = passwordController.text;
+
+    _errorUsername = null;
+    _errorPassword = null;
+
+    if (!EmployeeSubmitRegexValidator().isValid(username)) {
+      _errorUsername = 'The employee code must be a valid';
+      print(_errorUsername);
+    }
+
+    if (password.length < 8) {
+      _errorPassword = 'Password incorrect';
+      print(_errorPassword);
+    }
+
+    if (_errorUsername == null && _errorPassword == null) {
+      showLoading();
+      Future.delayed(const Duration(seconds: 2)).then((value) {
+        Navigator.pop(context);
+        if (username == 'D9302' && password == '12345678') {
+          print('success');
+        } else {
+          print('Show alert');
+          setState(() {});
+        }
+      });
+    } else {
+      setState(() {});
+    }
+  }
+
   Container _buildSubmitFormButton() => Container(
         width: 220,
         height: 50,
         decoration: _boxDecoration(),
         child: TextButton(
-          onPressed: () {
-            String username = usernameController.text;
-            String password = passwordController.text;
-
-            _errorUsername = null;
-            _errorPassword = null;
-
-            if (!EmployeeSubmitRegexValidator().isValid(username)) {
-              _errorUsername = 'The employee code must be a valid';
-              print(_errorUsername);
-            }
-
-            if (password.length < 8) {
-              _errorPassword = 'Password incorrect';
-              print(_errorPassword);
-            }
-
-            if (_errorUsername == null && _errorPassword == null){
-              setState(() {
-
-              });
-            }else{
-              setState(() {
-
-              });
-            }
-          },
+          onPressed: _onLogin,
           child: const Text(
             'LOGIN',
             style: TextStyle(
@@ -154,6 +171,15 @@ class FormInput extends StatefulWidget {
 }
 
 class _FormInputState extends State<FormInput> {
+  late bool _obscureTextPassword;
+  final _passwordFocusNode = FocusNode();
+
+  @override
+  void initState() {
+    _obscureTextPassword = true;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -190,8 +216,17 @@ class _FormInputState extends State<FormInput> {
             size: 22,
             color: Colors.black,
           ),
+          suffixIcon: IconButton(
+              icon: _obscureTextPassword
+                  ? const Icon(Icons.visibility)
+                  : const Icon(Icons.visibility_off),
+              onPressed: () {
+                setState(() {
+                  _obscureTextPassword = !_obscureTextPassword;
+                });
+              }),
         ),
-        // obscureText: true,
+        obscureText: _obscureTextPassword,
       );
 
   TextField _buildUsername() => TextField(
@@ -214,7 +249,11 @@ class _FormInputState extends State<FormInput> {
             size: 22,
             color: Colors.black,
           ),
+          suffixIcon: IconButton(
+              icon: const Icon(Icons.cancel),
+              onPressed: () {
+                widget.usernameController!.clear();
+              }),
         ),
-        // obscureText: true,
       );
 }
