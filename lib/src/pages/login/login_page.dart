@@ -1,4 +1,5 @@
 import 'package:firstflutter/src/pages/login/widgets/header.dart';
+import 'package:firstflutter/src/pages/login/widgets/single_sign_on.dart';
 import 'package:firstflutter/src/pages/login/widgets/login_form.dart';
 import 'package:flutter/material.dart';
 import 'package:firstflutter/src/config/theme.dart' as custom_theme;
@@ -26,8 +27,8 @@ class _LoginPageState extends State<LoginPage> {
             children: const <Widget>[
               Header(),
               LoginForm(),
-              // Text('forgot password'),
-              // Text('SSO'),
+              Text('forgot password'),
+              SingleSignOn(),
               // Text('register'),
             ],
           )

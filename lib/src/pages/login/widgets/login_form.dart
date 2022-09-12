@@ -197,6 +197,7 @@ class _FormInputState extends State<FormInput> {
   }
 
   TextField _buildPassword() => TextField(
+        focusNode: _passwordFocusNode,
         controller: widget.passwordController,
         style: const TextStyle(
           color: Colors.black,
@@ -255,5 +256,9 @@ class _FormInputState extends State<FormInput> {
                 widget.usernameController!.clear();
               }),
         ),
+        onSubmitted: (String value) {
+          FocusScope.of(context).requestFocus(_passwordFocusNode);
+        },
+        textInputAction: TextInputAction.next,
       );
 }
