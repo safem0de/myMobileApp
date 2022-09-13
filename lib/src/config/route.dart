@@ -9,7 +9,7 @@ class Route {
   static Map<String, WidgetBuilder> getAll() => _route;
 
   static final Map<String, WidgetBuilder> _route = {
-    home: (context) => const HomePage(username: '-'),
+    home: (context) => const HomePage(),
     login: (context) => const LoginPage(),
   };
 }

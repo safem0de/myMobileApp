@@ -120,7 +120,11 @@ class _LoginFormState extends State<LoginForm> {
           //     ),
           //   ),
           // );
-          Navigator.pushReplacementNamed(context, custom_route.Route.home);
+          Navigator.pushReplacementNamed(
+            context,
+            custom_route.Route.home,
+            // arguments: {username: username},
+          );
         } else {
           showAlertBar();
           setState(() {});

@@ -1,14 +1,10 @@
 import 'package:intl/intl.dart';
-
-import '../login/login_page.dart';
-
+import '../../viewmodels/menu_view_model.dart';
 import '../../constants/asset.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.username});
-
-  final String? username;
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -43,12 +39,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                     title: TextButton(
                       onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const LoginPage(),
-                          ),
-                        );
+                        Navigator.of(context).pop();
+                        showDialogLogout(context);
                       },
                       child: const Text(
                         'Logout',
@@ -77,162 +69,13 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            const DrawerHeader(
-              decoration: BoxDecoration(
+            DrawerHeader(
+              decoration: const BoxDecoration(
                 color: Colors.blue,
               ),
-              child: Image(image: AssetImage(Asset.LOGO_IMAGE)),
+              child: _buildProfile(),
             ),
-            ListTile(
-              leading: const Icon(Icons.merge),
-              title: const Text(
-                'Insert Slot',
-                style: TextStyle(fontSize: 22),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.format_paint_rounded),
-              title: const Text(
-                'Painting',
-                style: TextStyle(fontSize: 22),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.change_circle_outlined),
-              title: const Text(
-                'Honing',
-                style: TextStyle(fontSize: 22),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.file_download_outlined),
-              title: const Text(
-                'Rotor Assembly',
-                style: TextStyle(fontSize: 22),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.precision_manufacturing_outlined),
-              title: const Text(
-                'Cutting Flange',
-                style: TextStyle(fontSize: 22),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.engineering),
-              title: const Text(
-                'Engineering',
-                style: TextStyle(fontSize: 22),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.category),
-              title: const Text(
-                'Materials Control',
-                style: TextStyle(fontSize: 22),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.factory_outlined),
-              title: const Text(
-                'Production Control',
-                style: TextStyle(fontSize: 22),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.handyman),
-              title: const Text(
-                'Maintenance',
-                style: TextStyle(fontSize: 22),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.groups_rounded),
-              title: const Text(
-                'Overtime',
-                style: TextStyle(fontSize: 22),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.square_foot),
-              title: const Text(
-                'IQC Incoming',
-                style: TextStyle(fontSize: 22),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.troubleshoot),
-              title: const Text(
-                'QC Patrol',
-                style: TextStyle(fontSize: 22),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.biotech),
-              title: const Text(
-                'QA Outgoing',
-                style: TextStyle(fontSize: 22),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.shopping_basket),
-              title: const Text(
-                'Purchase',
-                style: TextStyle(fontSize: 22),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.psychology),
-              title: const Text(
-                'ISO & Training',
-                style: TextStyle(fontSize: 22),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
+            ..._buildMainMenu(),
             const Divider(
               thickness: 1,
             ),
@@ -246,4 +89,86 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  Future<void> showDialogLogout(BuildContext context) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          icon: const Icon(
+            Icons.warning_amber_rounded,
+            color: Colors.red,
+            size: 50.0,
+          ),
+          title: const Text('Logout Confirmation'),
+          content: const Text(
+            'Are you sure to logout?\n'
+            'Please click confirm.\n'
+            '\n'
+            'ต้องการออกจากระบบ? กรุณาปุ่มกดยืนยัน.\n',
+            style: TextStyle(fontSize: 18.0),
+          ),
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text(
+                'Cancel',
+                style: TextStyle(fontSize: 20.0),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text(
+                'Confirm',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  color: Colors.red,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  UserAccountsDrawerHeader _buildProfile() => const UserAccountsDrawerHeader(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(Asset.LOGO_IMAGE),
+          ),
+        ),
+        accountName: Text(''),
+        accountEmail: Text('User : D9302'),
+      );
+
+  List<ListTile> _buildMainMenu() => MenuViewModel()
+      .item
+      .map(
+        (item) => ListTile(
+          title: Text(
+            item.title,
+            style: const TextStyle(fontSize: 22),
+          ),
+          leading: Icon(
+            item.icon,
+            color: item.iconColor,
+          ),
+          onTap: () {
+            item.onTap!(context);
+          },
+        ),
+      )
+      .toList();
 }
