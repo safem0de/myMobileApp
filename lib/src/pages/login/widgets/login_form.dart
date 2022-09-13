@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'package:firstflutter/src/config/route.dart' as custom_route;
 import 'package:another_flushbar/flushbar.dart';
 import '../../home/home_page.dart';
 import '../../../utils/regex_validation.dart';
@@ -111,15 +111,16 @@ class _LoginFormState extends State<LoginForm> {
       Future.delayed(const Duration(seconds: 2)).then((value) {
         Navigator.pop(context);
         if (username == 'D9302' && password == '12345678') {
-          print('success');
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => HomePage(
-                username: username,
-              ),
-            ),
-          );
+          // print('success');
+          // Navigator.pushReplacement(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) => HomePage(
+          //       username: username,
+          //     ),
+          //   ),
+          // );
+          Navigator.pushReplacementNamed(context, custom_route.Route.home);
         } else {
           showAlertBar();
           setState(() {});

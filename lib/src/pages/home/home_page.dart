@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.username});
 
-  final String username;
+  final String? username;
 
   @override
   State<HomePage> createState() => _HomePageState();
