@@ -1,3 +1,4 @@
+import 'process_menu.dart';
 import 'package:intl/intl.dart';
 import '../../viewmodels/menu_view_model.dart';
 import '../../constants/asset.dart';
@@ -13,6 +14,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   static final DateTime now = DateTime.now();
   final String year = DateFormat('yyyy').format(now);
+
+  late ProcessMenu menu;
 
   @override
   Widget build(BuildContext context) {
@@ -57,14 +60,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Text('Center'),
-          ],
-        ),
-      ),
+      body: chooseColumn(menu),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -171,4 +167,79 @@ class _HomePageState extends State<HomePage> {
         ),
       )
       .toList();
+
+  Container chooseColumn(ProcessMenu title) {
+    switch (title.toString()) {
+      case 'Insert slot':
+        {
+          return Container(
+            alignment: Alignment.center,
+            child: const Text('Insert slot'),
+          );
+        }
+      case 'Painting':
+        {
+          return Container(
+            alignment: Alignment.center,
+            child: const Text('Painting'),
+          );
+        }
+      case 'Honing':
+        {
+          return Container(
+            alignment: Alignment.center,
+            child: const Text('No Data'),
+          );
+        }
+      case 'Rotor assembly':
+        {
+          return Container(
+            alignment: Alignment.center,
+            child: const Text('Rotor assembly'),
+          );
+        }
+      case 'Cutting flange':
+        {
+          return Container(
+            alignment: Alignment.center,
+            child: const Text('Cutting flange'),
+          );
+        }
+      case 'Engineering':
+        {
+          return Container(
+            alignment: Alignment.center,
+            child: const Text('No Data'),
+          );
+        }
+      case 'Materials control':
+        {
+          return Container(
+            alignment: Alignment.center,
+            child: const Text('No Data'),
+          );
+        }
+      case 'Productions control':
+        {
+          return Container(
+            alignment: Alignment.center,
+            child: const Text('No Data'),
+          );
+        }
+      case 'Maintenance':
+        {
+          return Container(
+            alignment: Alignment.center,
+            child: const Text('No Data'),
+          );
+        }
+      default:
+        {
+          return Container(
+            alignment: Alignment.center,
+            child: const Text('No Data'),
+          );
+        }
+    }
+  }
 }
