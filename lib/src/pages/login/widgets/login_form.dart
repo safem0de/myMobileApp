@@ -1,7 +1,5 @@
-import 'dart:ui';
-import 'package:firstflutter/src/config/route.dart' as custom_route;
+import '../../../config/route.dart' as custom_route;
 import 'package:another_flushbar/flushbar.dart';
-import '../../home/home_page.dart';
 import '../../../utils/regex_validation.dart';
 import 'package:flutter/material.dart';
 import '../../../config/theme.dart' as custom_theme;
@@ -98,12 +96,12 @@ class _LoginFormState extends State<LoginForm> {
 
     if (!EmployeeSubmitRegexValidator().isValid(username)) {
       _errorUsername = 'The employee code must be a valid';
-      print(_errorUsername);
+      debugPrint(_errorUsername);
     }
 
     if (password.length < 8) {
       _errorPassword = 'Password incorrect';
-      print(_errorPassword);
+      debugPrint(_errorPassword);
     }
 
     if (_errorUsername == null && _errorPassword == null) {

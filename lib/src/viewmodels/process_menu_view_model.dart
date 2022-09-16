@@ -1,4 +1,4 @@
-import '../../constants/asset.dart';
+import '../constants/asset.dart';
 import 'package:flutter/material.dart';
 
 class ProcessMenu {

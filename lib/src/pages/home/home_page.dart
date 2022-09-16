@@ -1,4 +1,4 @@
-import 'process_menu.dart';
+import 'package:firstflutter/src/pages/home/grid_app.dart';
 import 'package:intl/intl.dart';
 import '../../viewmodels/menu_view_model.dart';
 import '../../constants/asset.dart';
@@ -14,8 +14,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   static final DateTime now = DateTime.now();
   final String year = DateFormat('yyyy').format(now);
-
-  late ProcessMenu menu;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +58,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: chooseColumn(menu),
+      body: const GridApp(),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -168,8 +166,8 @@ class _HomePageState extends State<HomePage> {
       )
       .toList();
 
-  Container chooseColumn(ProcessMenu title) {
-    switch (title.toString()) {
+  Container chooseColumn(String title) {
+    switch (title) {
       case 'Insert slot':
         {
           return Container(
