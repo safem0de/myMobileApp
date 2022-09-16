@@ -1,4 +1,4 @@
-import 'package:firstflutter/src/pages/home/grid_app.dart';
+import 'package:firstflutter/src/pages/home/widgets/grid_app.dart';
 import 'package:intl/intl.dart';
 import '../../viewmodels/menu_view_model.dart';
 import '../../constants/asset.dart';

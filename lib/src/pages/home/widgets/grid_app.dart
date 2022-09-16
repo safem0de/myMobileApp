@@ -1,3 +1,4 @@
+import 'program_item.dart';
 import 'package:flutter/material.dart';
 
 class GridApp extends StatefulWidget {
@@ -12,12 +13,16 @@ class _GridAppState extends State<GridApp> {
   Widget build(BuildContext context) {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
+        crossAxisCount: 2,
         childAspectRatio: 1.5,
-        crossAxisSpacing: 5,
-        mainAxisSpacing: 5,
+        crossAxisSpacing: 2,
+        mainAxisSpacing: 10,
       ),
-      itemBuilder: (context, index) => Text('$index'),
+      itemBuilder: (context, index) => LayoutBuilder(
+        builder: (context, BoxConstraints constraints) {
+          return ProgramItem(constraints.maxHeight);
+        },
+      ),
       itemCount: 5,
     );
   }
