@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'MainMenu',
+          'Main Menu',
           style: TextStyle(fontSize: 30),
         ),
         actions: <Widget>[

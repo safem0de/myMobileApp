@@ -4,16 +4,18 @@ import 'package:flutter/material.dart';
 class ProcessMenu {
   late String? title;
   late Image? image;
+  late Widget? widget;
   late Function(BuildContext context)? onPressed;
 
   ProcessMenu({
     this.title,
     this.image,
+    this.widget,
     this.onPressed,
   });
 }
 
-class ProcessMenuInsertSlot {
+class ProcessMenuViewModel {
   List<ProcessMenu> get item => <ProcessMenu>[
         ProcessMenu(
           title: 'Insert Slot',

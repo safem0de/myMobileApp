@@ -10,19 +10,51 @@ class ProgramItem extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // _buildIcon(),
+        _buildIcon(),
         _buildName(),
       ],
     );
   }
 
-  // _buildIcon() {}
+  Stack _buildIcon() {
+    final height = maxHeight * 0.85;
+    return Stack(
+      // fit: StackFit.expand,
+      children: [
+        SizedBox(
+          height: height,
+          child: IconButton(
+            splashRadius: maxHeight * 0.5,
+            iconSize: maxHeight,
+            icon: CircleAvatar(
+              maxRadius: maxHeight,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(100.0),
+                child: Image.asset(
+                  Asset.SETUP_SLOT_IMAGE,
+                  height: maxHeight,
+                ),
+              ),
+            ),
+            onPressed: () {
+              // do something when the button is pressed
+              debugPrint('Hi there');
+            },
+          ),
+        ),
+      ],
+    );
+  }
 
-  Text _buildName() {
-    return const Text(
-      'test',
-      style: TextStyle(
-        fontWeight: FontWeight.w500,
+  Expanded _buildName() {
+    return const Expanded(
+      child: Text(
+        'test',
+        style: TextStyle(
+          fontWeight: FontWeight.w500,
+        ),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }
