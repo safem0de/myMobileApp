@@ -16,6 +16,6 @@ class Route {
     home: (context) => const HomePage(),
     login: (context) => const LoginPage(),
     insertSlot: (context) => const InsertSlot(),
-    runAndCheck: (context) => const RunAndCheck(),
+    runAndCheck: (context) => RunAndCheck(),
   };
 }
