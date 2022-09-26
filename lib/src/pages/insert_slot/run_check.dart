@@ -11,9 +11,9 @@ class RunAndCheck extends StatelessWidget {
         child: Column(
           children: [
             _buildscan(),
-            _buildslotcheck(),
+            _buildSlotCheck(),
             const SizedBox(height: 8.0),
-            _buildstatorcheck(),
+            _buildStatorCheck(),
             _buildsubmit(),
           ],
         ),
@@ -28,7 +28,7 @@ class RunAndCheck extends StatelessWidget {
     );
   }
 
-  Card _buildslotcheck() {
+  Card _buildSlotCheck() {
     return Card(
       margin: const EdgeInsets.only(
         left: 24.0,
@@ -110,7 +110,7 @@ class RunAndCheck extends StatelessWidget {
     );
   }
 
-  Card _buildstatorcheck() {
+  Card _buildStatorCheck() {
     return Card(
       margin: const EdgeInsets.only(
         left: 24.0,
