@@ -1,5 +1,5 @@
-import 'package:firstflutter/src/config/route.dart' as custom_route;
-import 'package:firstflutter/src/pages/login/login_page.dart';
+import 'config/route.dart' as custom_route;
+import 'pages/login/login_page.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {

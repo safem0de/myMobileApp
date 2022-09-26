@@ -5,6 +5,38 @@ class RunAndCheck extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Barcode & QR Scanner"),
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            _buildscan(),
+            _buildslotcheck(),
+            _buildstatorcheck(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  TextButton _buildscan() {
+    return TextButton(
+      onPressed: () {},
+      child: const Text('Scan'),
+    );
+  }
+
+  _buildslotcheck() {
+    return Container(
+      child: Card(
+        child: Column(),
+      ),
+    );
+  }
+
+  _buildstatorcheck() {
+    return;
   }
 }

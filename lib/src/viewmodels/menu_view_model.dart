@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../config/route.dart' as custom_route;
 import '../pages/insert_slot/insert_slot.dart';
 
 class Menu {
@@ -26,7 +26,7 @@ class MenuViewModel {
           iconColor: Colors.blue,
           // widget: const InsertSlot(),
           onTap: (context) {
-            Navigator.pop(context);
+            Navigator.pushNamed(context, custom_route.Route.runAndCheck);
           },
         ),
         Menu(
