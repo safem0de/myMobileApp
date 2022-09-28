@@ -1,4 +1,7 @@
+import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'dart:async';
 
 class RunAndCheck extends StatelessWidget {
   @override
@@ -10,20 +13,22 @@ class RunAndCheck extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            _buildscan(),
+            _buildscan(context: context),
             _buildSlotCheck(),
             const SizedBox(height: 8.0),
             _buildStatorCheck(),
-            _buildsubmit(),
+            _buildSubmit(),
           ],
         ),
       ),
     );
   }
 
-  TextButton _buildscan() {
+  TextButton _buildscan({required BuildContext context}) {
     return TextButton(
-      onPressed: () {},
+      onPressed: () {
+        scanQRCode(context: context);
+      },
       child: const Text('Scan'),
     );
   }
@@ -196,10 +201,50 @@ class RunAndCheck extends StatelessWidget {
     );
   }
 
-  TextButton _buildsubmit() {
+  TextButton _buildSubmit() {
     return TextButton(
       onPressed: () {},
       child: const Text('Submit'),
+    );
+  }
+
+  Future scanQRCode({required BuildContext context}) async {
+    try {
+      final result = await BarcodeScanner.scan();
+      final String barcode = result.rawContent;
+
+      showAlertDialog(result: barcode, context: context);
+    } on PlatformException catch (exception) {
+      if (exception.code == BarcodeScanner.cameraAccessDenied) {
+        showAlertDialog(
+            result: 'not grant permission to open the camera',
+            context: context);
+      } else {
+        print('Unknown error: $exception');
+      }
+    } catch (exception) {
+      print('Unknown error: $exception');
+    }
+  }
+
+  showAlertDialog({required BuildContext context, required String result}) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("Result"),
+          content: Text(result),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text("Close"),
+            )
+          ],
+        );
+      },
     );
   }
 }
