@@ -3,9 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
 
-class RunAndCheck extends StatelessWidget {
+class RunAndCheck extends StatefulWidget {
   const RunAndCheck({super.key});
 
+  @override
+  State<RunAndCheck> createState() => _RunAndCheckState();
+}
+
+class _RunAndCheckState extends State<RunAndCheck> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -211,24 +216,6 @@ class RunAndCheck extends StatelessWidget {
   }
 
   // Future scanQRCode({required BuildContext context}) async {
-  //   try {
-  //     final result = await BarcodeScanner.scan();
-  //     final String barcode = result.rawContent;
-  //
-  //     showAlertDialog(result: barcode, context: context);
-  //   } on PlatformException catch (exception) {
-  //     if (exception.code == BarcodeScanner.cameraAccessDenied) {
-  //       showAlertDialog(
-  //           result: 'not grant permission to open the camera',
-  //           context: context);
-  //     } else {
-  //       print('Unknown error: $exception');
-  //     }
-  //   } catch (exception) {
-  //     print('Unknown error: $exception');
-  //   }
-  // }
-
   showAlertDialog({required BuildContext context, required String result}) {
     showDialog(
       context: context,
