@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
 
+import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
+
 class RunAndCheck extends StatefulWidget {
   const RunAndCheck({super.key});
 
@@ -33,8 +35,20 @@ class _RunAndCheckState extends State<RunAndCheck> {
 
   TextButton _buildscan({required BuildContext context}) {
     return TextButton(
-      onPressed: () {
+      onPressed: () async {
         // scanQRCode(context: context);
+        var res = await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const SimpleBarcodeScannerPage(
+                isShowFlashIcon: true,
+              ),
+            ));
+        setState(() {
+          if (res is String) {
+            print(res);
+          }
+        });
       },
       child: const Text('Scan'),
     );
