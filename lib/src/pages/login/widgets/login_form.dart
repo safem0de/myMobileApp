@@ -1,5 +1,8 @@
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../../config/route.dart' as custom_route;
 import 'package:another_flushbar/flushbar.dart';
+import '../../../constants/setting.dart';
 import '../../../utils/regex_validation.dart';
 import 'package:flutter/material.dart';
 import '../../../config/theme.dart' as custom_theme;
@@ -106,7 +109,7 @@ class _LoginFormState extends State<LoginForm> {
 
     if (_errorUsername == null && _errorPassword == null) {
       showLoading();
-      Future.delayed(const Duration(seconds: 2)).then((value) {
+      Future.delayed(const Duration(seconds: 2)).then((value) async {
         Navigator.pop(context);
         if (username == 'D9302' && password == '12345678') {
           // print('success');
@@ -118,7 +121,12 @@ class _LoginFormState extends State<LoginForm> {
           //     ),
           //   ),
           // );
-          Navigator.pushReplacementNamed(
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.setString(Setting.TOKEN_PREF, '_token');
+          await prefs.setString(Setting.USERNAME_PREF, username);
+          // print(prefs);
+          // ignore: use_build_context_synchronously
+          await Navigator.pushReplacementNamed(
             context,
             custom_route.Route.home,
             // arguments: {username: username},
