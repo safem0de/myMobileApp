@@ -1,8 +1,11 @@
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'widgets/grid_app.dart';
 import 'package:intl/intl.dart';
 import '../../viewmodels/menu_view_model.dart';
 import '../../constants/asset.dart';
 import 'package:flutter/material.dart';
+import '../../config/route.dart' as custom_route;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -87,7 +90,7 @@ class _HomePageState extends State<HomePage> {
   Future<void> showDialogLogout(BuildContext context) {
     return showDialog<void>(
       context: context,
-      builder: (BuildContext context) {
+      builder: (BuildContext dialogContext) {
         return AlertDialog(
           icon: const Icon(
             Icons.warning_amber_rounded,
@@ -112,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                 style: TextStyle(fontSize: 20.0),
               ),
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.of(dialogContext).pop();
               },
             ),
             TextButton(
@@ -128,7 +131,10 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               onPressed: () {
-                Navigator.of(context).pop();
+                SharedPreferences.getInstance().then((prefs) => prefs.clear());
+                Navigator.of(dialogContext).pop();
+                Navigator.pushNamedAndRemoveUntil(
+                    context, custom_route.Route.login, (route) => false);
               },
             ),
           ],
