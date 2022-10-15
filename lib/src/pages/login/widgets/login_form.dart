@@ -112,23 +112,15 @@ class _LoginFormState extends State<LoginForm> {
       Future.delayed(const Duration(seconds: 2)).then((value) async {
         Navigator.pop(context);
         if (username == 'D9302' && password == '12345678') {
-          // print('success');
-          // Navigator.pushReplacement(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => HomePage(
-          //       username: username,
-          //     ),
-          //   ),
-          // );
-          final prefs = await SharedPreferences.getInstance();
-          await prefs.setString(Setting.TOKEN_PREF, '_token');
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          await prefs.setString(Setting.TOKEN_PREF, '_token2022');
           await prefs.setString(Setting.USERNAME_PREF, username);
-          // print(prefs);
+
           // ignore: use_build_context_synchronously
           await Navigator.pushReplacementNamed(
             context,
             custom_route.Route.home,
+            arguments: {'username': username},
             // arguments: {username: username},
           );
         } else {

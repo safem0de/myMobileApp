@@ -1,3 +1,4 @@
+import '../../constants/setting.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'widgets/grid_app.dart';
@@ -150,7 +151,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         accountName: Text(''),
-        accountEmail: Text('User : D9302'),
+        accountEmail: Text(''),
       );
 
   List<ListTile> _buildMainMenu() => MenuViewModel()
